@@ -33,6 +33,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# data directories - exclude stored applications and resumes
+# data directories - exclude stored applications, resumes, and logs
 /data/applications
 /data/resumes
+/data/logs

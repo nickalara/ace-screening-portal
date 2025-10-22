@@ -6,6 +6,8 @@ import { Readable } from 'stream';
 import { saveApplicationData, saveResumeFile } from '@/lib/storage';
 import { ApplicationData, ScreeningResponse } from '@/lib/types';
 import { SCREENING_QUESTIONS } from '@/lib/constants';
+import { applyRateLimit } from '@/lib/rate-limit';
+import { logger, getClientIP } from '@/lib/logger';
 
 // Disable body parsing for file uploads
 export const runtime = 'nodejs';
@@ -42,7 +44,38 @@ async function parseFormData(request: NextRequest): Promise<{ fields: any; files
 }
 
 export async function POST(request: NextRequest) {
+  // Extract IP address for logging
+  const clientIP = getClientIP(request);
+
   try {
+    // Apply rate limiting
+    const rateLimitResult = applyRateLimit(request);
+
+    if (!rateLimitResult.allowed) {
+      // Log rate limit exceeded
+      await logger.warn('validation_failed' as any, {
+        reason: 'rate_limit_exceeded',
+        retryAfter: rateLimitResult.retryAfter,
+      }, { ip: clientIP, sanitize: false });
+
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Too many requests. Please try again later.',
+          error: 'RATE_LIMIT_EXCEEDED',
+        },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': rateLimitResult.retryAfter.toString(),
+            'X-RateLimit-Limit': '10',
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+          },
+        }
+      );
+    }
+
     // Parse form data
     const { fields, files } = await parseFormData(request);
 
@@ -51,6 +84,13 @@ export async function POST(request: NextRequest) {
 
     // Validate resume file
     if (!files.resume) {
+      // Log validation failure
+      await logger.validationFailed({
+        error: 'missing_resume_file',
+        fullName: data.fullName,
+        email: data.email,
+      }, clientIP);
+
       return NextResponse.json(
         { success: false, message: 'Resume file is required' },
         { status: 400 }
@@ -89,6 +129,14 @@ export async function POST(request: NextRequest) {
       resumeFile.mimetype
     );
 
+    // Log file upload success
+    await logger.fileUploaded(
+      applicationId,
+      resumeFile.originalFilename,
+      fileSize,
+      clientIP
+    );
+
     // Build complete application data
     const applicationData: ApplicationData = {
       applicationId,
@@ -111,13 +159,45 @@ export async function POST(request: NextRequest) {
     // Save application data as JSON
     await saveApplicationData(applicationData);
 
-    // Return success response
-    return NextResponse.json({
-      success: true,
+    // Log successful application submission
+    await logger.applicationSubmitted(
       applicationId,
-      message: 'Application submitted successfully',
-    });
+      clientIP,
+      {
+        fullName: data.fullName,
+        email: data.email,
+        phone: data.phone,
+        resumeFilename: resumeFile.originalFilename,
+        resumeSize: fileSize,
+      }
+    );
+
+    // Return success response with rate limit headers
+    return NextResponse.json(
+      {
+        success: true,
+        applicationId,
+        message: 'Application submitted successfully',
+      },
+      {
+        headers: {
+          'X-RateLimit-Limit': '10',
+          'X-RateLimit-Remaining': rateLimitResult.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimitResult.resetTime).toISOString(),
+        },
+      }
+    );
   } catch (error) {
+    // Log application failure
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    await logger.applicationFailed(
+      errorMessage,
+      clientIP,
+      {
+        errorStack: error instanceof Error ? error.stack : undefined,
+      }
+    );
+
     console.error('Error processing application:', error);
     return NextResponse.json(
       {

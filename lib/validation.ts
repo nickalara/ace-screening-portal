@@ -29,7 +29,7 @@ export const createQuestionSchema = (minLength?: number) => {
 };
 
 // File Upload Validation
-export const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+export const MAX_FILE_SIZE = parseInt(process.env.NEXT_PUBLIC_MAX_FILE_SIZE || '5242880'); // Default: 5MB
 export const ALLOWED_FILE_TYPES = [
   'application/pdf',
   'application/msword',

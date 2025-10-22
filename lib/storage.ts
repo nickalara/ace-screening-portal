@@ -1,10 +1,11 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { ApplicationData } from './types';
+import { logger } from './logger';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
-const APPLICATIONS_DIR = path.join(DATA_DIR, 'applications');
-const RESUMES_DIR = path.join(DATA_DIR, 'resumes');
+const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), 'data');
+const APPLICATIONS_DIR = process.env.APPLICATIONS_DIR || path.join(DATA_DIR, 'applications');
+const RESUMES_DIR = process.env.RESUMES_DIR || path.join(DATA_DIR, 'resumes');
 
 // Ensure directories exist
 export async function ensureDirectories() {
@@ -12,7 +13,18 @@ export async function ensureDirectories() {
     await fs.mkdir(DATA_DIR, { recursive: true });
     await fs.mkdir(APPLICATIONS_DIR, { recursive: true });
     await fs.mkdir(RESUMES_DIR, { recursive: true });
+
+    // Log directory creation success
+    await logger.info('directory_created' as any, {
+      directories: ['data', 'applications', 'resumes'],
+    }, { sanitize: false });
   } catch (error) {
+    // Log directory creation failure
+    await logger.error('directory_create_failed' as any, {
+      error: error instanceof Error ? error.message : 'Unknown error',
+      directories: ['data', 'applications', 'resumes'],
+    }, { sanitize: false });
+
     console.error('Error creating directories:', error);
     throw error;
   }
@@ -28,7 +40,19 @@ export async function saveApplicationData(data: ApplicationData): Promise<void> 
   try {
     await fs.writeFile(filepath, JSON.stringify(data, null, 2), 'utf-8');
     console.log('Application saved:', filepath);
+
+    // Log successful data save
+    await logger.dataSaved('application', data.applicationId, {
+      filename,
+      timestamp: data.timestamp,
+    });
   } catch (error) {
+    // Log data save failure
+    await logger.dataSaveFailed('application', error instanceof Error ? error.message : 'Unknown error', {
+      applicationId: data.applicationId,
+      filename,
+    });
+
     console.error('Error saving application:', error);
     throw error;
   }
@@ -52,11 +76,25 @@ export async function saveResumeFile(
     await fs.writeFile(filepath, file);
     console.log('Resume saved:', filepath);
 
+    // Log successful file save
+    await logger.dataSaved('resume', applicationId, {
+      originalFilename,
+      storedFilename,
+      fileSize: file.length,
+      mimeType,
+    });
+
     return {
       storedFilename,
       fileSize: file.length,
     };
   } catch (error) {
+    // Log file save failure
+    await logger.fileUploadFailed(
+      error instanceof Error ? error.message : 'Unknown error',
+      originalFilename
+    );
+
     console.error('Error saving resume:', error);
     throw error;
   }

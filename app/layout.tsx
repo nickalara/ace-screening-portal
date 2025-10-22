@@ -1,5 +1,12 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { performStartupValidation } from '@/lib/startup-validation';
+
+// Validate environment variables on startup
+if (typeof window === 'undefined') {
+  // Only run on server-side
+  performStartupValidation();
+}
 
 export const metadata: Metadata = {
   title: 'Application Content Engineer - StartGuides',
