@@ -6,6 +6,7 @@ import { Readable } from 'stream';
 import { saveApplicationData, saveResumeFile } from '@/lib/storage';
 import { ApplicationData, ScreeningResponse } from '@/lib/types';
 import { SCREENING_QUESTIONS } from '@/lib/constants';
+import { sendConfirmationEmail, sendToN8nWorkflow } from '@/lib/email';
 
 // Disable body parsing for file uploads
 export const runtime = 'nodejs';
@@ -110,6 +111,18 @@ export async function POST(request: NextRequest) {
 
     // Save application data as JSON
     await saveApplicationData(applicationData);
+
+    // Send confirmation email to applicant (don't wait for it)
+    sendConfirmationEmail(applicationData).catch((error) => {
+      console.error('Failed to send confirmation email:', error);
+      // Don't fail the application submission if email fails
+    });
+
+    // Send to n8n workflow for AI analysis (don't wait for it)
+    sendToN8nWorkflow(applicationData).catch((error) => {
+      console.error('Failed to send to n8n workflow:', error);
+      // Don't fail the application submission if n8n fails
+    });
 
     // Return success response
     return NextResponse.json({

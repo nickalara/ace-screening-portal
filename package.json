@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@sendgrid/mail": "^8.1.6",
     "formidable": "^3.5.1",
     "lucide-react": "^0.294.0",
     "next": "14.0.4",
