@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverActions: true,
-  },
+  // Removed 'standalone' output - not needed for Azure Deployment Center
+  // Azure will handle the deployment configuration automatically
 }
 
 module.exports = nextConfig
