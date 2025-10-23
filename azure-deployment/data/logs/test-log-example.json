@@ -1,0 +1,4 @@
+{"timestamp":"2025-10-21T12:00:00.000Z","level":"INFO","event":"application_submitted","ip":"192.168.1.100","applicationId":"ACE-2025-EXAMPLE1","details":{"fullName":"J*** S***","email":"joh**********","phone":"555**********","resumeFilename":"resume.pdf","resumeSize":1024000}}
+{"timestamp":"2025-10-21T12:01:00.000Z","level":"INFO","event":"file_uploaded","ip":"192.168.1.100","applicationId":"ACE-2025-EXAMPLE1","details":{"filename":"resume.pdf","size":1024000}}
+{"timestamp":"2025-10-21T12:02:00.000Z","level":"WARN","event":"validation_failed","ip":"192.168.1.101","details":{"error":"missing_resume_file","fullName":"J*** D***","email":"jan**********"}}
+{"timestamp":"2025-10-21T12:03:00.000Z","level":"ERROR","event":"application_failed","ip":"192.168.1.102","details":{"error":"Database connection timeout","errorStack":"Error: Connection timeout at line 123"}}

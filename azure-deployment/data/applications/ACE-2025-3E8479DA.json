@@ -1,0 +1,53 @@
+{
+  "applicationId": "ACE-2025-3E8479DA",
+  "timestamp": "2025-10-23T07:22:01.518Z",
+  "personalInfo": {
+    "fullName": "Nicholas Lara",
+    "email": "nicholas.lara@startguides.com",
+    "phone": "(555) 123-4567",
+    "linkedin": "https://linkedin.com/in/nicklara"
+  },
+  "screeningResponses": [
+    {
+      "questionId": "q1_technical_learning",
+      "questionText": "Describe a time when you had to quickly learn and explain a complex technical system or process. What was the system, and how did you approach learning it?",
+      "answer": "I had to quickly learn a complex military training system when working on a project for DoD contractors. The system involved multiple integrated databases and simulation platforms. I approached it by first reviewing all available documentation, then setting up a test environment to experiment with the system hands-on. Within two weeks, I was able to create comprehensive training materials for end users."
+    },
+    {
+      "questionId": "q2_field_work_comfort",
+      "questionText": "This role requires working in field environments, climbing on/off military equipment, and operating in potentially austere conditions. Describe your experience working in similar environments, or explain your readiness for this type of hands-on work.",
+      "answer": "I have extensive experience working in field environments, including outdoor construction sites and industrial facilities. I am comfortable with physical work and have no limitations that would prevent me from climbing on equipment or working in austere conditions. I maintain physical fitness and have worked in various weather conditions."
+    },
+    {
+      "questionId": "q3_ai_tools_proficiency",
+      "questionText": "StartGuides is an AI-first company. Describe your experience using AI tools (like ChatGPT, Claude, Midjourney, etc.) or low/no-code platforms in professional or personal projects. What tools have you used and for what purposes?",
+      "answer": "I have extensive experience with AI tools including ChatGPT, Claude, and various low/no-code platforms. I use these tools daily for code generation, documentation writing, and problem-solving. I've built several automation workflows using AI-powered tools and understand how to prompt engineer effectively for optimal results."
+    },
+    {
+      "questionId": "q4_communication_style",
+      "questionText": "You'll work independently on customer sites and collaborate remotely with the team. How do you approach communication in this type of environment? Give an example of how you've managed stakeholder expectations while working independently.",
+      "answer": "I excel at remote communication and have managed multiple projects while working independently at client sites. I use Slack for daily updates, maintain detailed documentation in Notion, and schedule regular video check-ins with stakeholders. In one project, I worked solo at a military base for three months while coordinating with a remote team, delivering all milestones on time."
+    },
+    {
+      "questionId": "q5_clearance_status",
+      "questionText": "What is your current security clearance status?",
+      "answer": "eligible_willing"
+    },
+    {
+      "questionId": "q6_travel_willingness",
+      "questionText": "This role requires travel up to 40% depending on project needs. This includes visiting military installations and customer sites. Are you able and willing to meet this travel requirement?",
+      "answer": "fully_available"
+    },
+    {
+      "questionId": "q7_motivation",
+      "questionText": "What draws you to this role at StartGuides specifically? What aspects of working with military systems, frontline personnel, and AI-powered application development excite you most?",
+      "answer": "I am excited about StartGuides' mission to leverage AI for military training. The combination of hands-on fieldwork with cutting-edge AI development aligns perfectly with my technical skills and interest in defense applications. I'm particularly drawn to the opportunity to work directly with frontline personnel and see the immediate impact of my work."
+    }
+  ],
+  "resume": {
+    "originalFilename": "test-resume.txt",
+    "storedFilename": "ACE-2025-3E8479DA_test-resume.txt",
+    "fileSize": 512,
+    "mimeType": "text/plain"
+  }
+}

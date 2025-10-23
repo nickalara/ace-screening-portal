@@ -1,0 +1,19 @@
+TEST RESUME - Nicholas Lara
+
+Email: nicholas.lara@startguides.com
+Phone: (555) 123-4567
+
+EXPERIENCE
+- Senior Software Engineer, Test Company (2020-Present)
+- Developed AI-powered applications using Claude and ChatGPT
+- Created technical documentation for complex systems
+
+EDUCATION
+- Bachelor of Science in Computer Science
+
+SKILLS
+- AI Tools: ChatGPT, Claude, Midjourney
+- Programming: Python, JavaScript, TypeScript
+- Documentation and Technical Writing
+
+This is a test resume for email functionality testing.
