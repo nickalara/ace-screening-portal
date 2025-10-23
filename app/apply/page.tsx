@@ -21,7 +21,7 @@ export default function ApplyPage() {
             Application Content Engineer
           </h1>
           <p className="text-lg text-slate-600">
-            We're excited to learn more about you. Please complete all sections below.
+            We&apos;re excited to learn more about you. Please complete all sections below.
           </p>
         </div>
 

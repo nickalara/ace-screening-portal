@@ -26,13 +26,28 @@
   --slate-100: #f1f5f9;
   --slate-50: #f8fafc;
 
-  /* Accent Blue Scale - CTAs, Links, Interactive */
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --blue-500: #3b82f6;
-  --blue-400: #60a5fa;
-  --blue-100: #dbeafe;
-  --blue-50: #eff6ff;
+  /* StartGuides Brand Orange - Primary CTAs, Links, Interactive */
+  --orange-950: #7a2e0f;
+  --orange-900: #9a3b13;
+  --orange-800: #c14617;
+  --orange-700: #d45c1f;
+  --orange-600: #ec722a; /* Primary brand color */
+  --orange-500: #f08850;
+  --orange-400: #f3a273;
+  --orange-300: #f7bc96;
+  --orange-200: #fad6ba;
+  --orange-100: #fdeedd;
+  --orange-50: #fef7f1;
+
+  /* Dark Neutrals - Matching StartGuides */
+  --dark-950: #0a0a0a;
+  --dark-900: #121212;
+  --dark-800: #1a1a1a;
+  --dark-700: #2a2a2a;
+
+  /* Light Backgrounds */
+  --light-100: #e2e5e7;
+  --light-50: #f5f6f7;
 
   /* Success Colors */
   --success-600: #16a34a;
@@ -65,8 +80,9 @@
      TYPOGRAPHY
      ============================================ */
 
-  /* Font Families */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  /* Font Families - Matching StartGuides */
+  --font-primary: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   --font-mono: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
 
   /* Font Sizes */
@@ -201,15 +217,15 @@
   --border-error: var(--error-600);
   --border-success: var(--success-600);
 
-  /* Interactive Colors */
-  --interactive-primary: var(--blue-600);
-  --interactive-primary-hover: var(--blue-700);
-  --interactive-primary-active: var(--blue-700);
+  /* Interactive Colors - StartGuides Orange */
+  --interactive-primary: var(--orange-600);
+  --interactive-primary-hover: var(--orange-700);
+  --interactive-primary-active: var(--orange-700);
 
-  /* Link Colors */
-  --link-default: var(--blue-600);
-  --link-hover: var(--blue-700);
-  --link-visited: var(--blue-700);
+  /* Link Colors - StartGuides Orange */
+  --link-default: var(--orange-600);
+  --link-hover: var(--orange-700);
+  --link-visited: var(--orange-700);
 }
 
 /* ============================================

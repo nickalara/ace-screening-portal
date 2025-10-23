@@ -71,7 +71,7 @@ export default function SuccessPage() {
                 <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold">
                   2
                 </span>
-                <span>We'll reach out via email if we'd like to schedule an interview</span>
+                <span>We&apos;ll reach out via email if we&apos;d like to schedule an interview</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="flex-shrink-0 flex items-center justify-center w-6 h-6 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold">

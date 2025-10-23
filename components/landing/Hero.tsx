@@ -13,7 +13,7 @@ interface HeroProps {
 
 export function Hero({ title, subtitle, badges, ctaText = 'Apply Now', ctaHref = '/apply' }: HeroProps) {
   return (
-    <section className="relative w-full min-h-[85vh] md:min-h-[85vh] flex items-center justify-center bg-gradient-to-b from-slate-950 to-slate-900 px-6 py-20 md:py-24">
+    <section className="relative w-full min-h-[85vh] md:min-h-[85vh] flex items-center justify-center bg-gradient-to-b from-dark-900 to-dark-800 px-6 py-20 md:py-24">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
           {title}

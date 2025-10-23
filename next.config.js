@@ -10,6 +10,16 @@ const nextConfig = {
     }
     return config
   },
+  // Allow external images from StartGuides domain
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'startguides.net',
+        pathname: '/wp-content/uploads/**',
+      },
+    ],
+  },
 }
 
 module.exports = nextConfig

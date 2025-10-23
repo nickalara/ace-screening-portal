@@ -9,6 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // StartGuides brand orange as primary
+        orange: {
+          950: '#7a2e0f',
+          900: '#9a3b13',
+          800: '#c14617',
+          700: '#d45c1f',
+          600: '#ec722a', // Primary brand color
+          500: '#f08850',
+          400: '#f3a273',
+          300: '#f7bc96',
+          200: '#fad6ba',
+          100: '#fdeedd',
+          50: '#fef7f1',
+        },
+        // Dark neutrals for backgrounds
         slate: {
           950: '#020617',
           900: '#0f172a',
@@ -22,13 +37,17 @@ const config: Config = {
           100: '#f1f5f9',
           50: '#f8fafc',
         },
-        blue: {
-          600: '#2563eb',
-          700: '#1d4ed8',
-          500: '#3b82f6',
-          400: '#60a5fa',
-          100: '#dbeafe',
-          50: '#eff6ff',
+        // Dark grays matching StartGuides
+        dark: {
+          950: '#0a0a0a',
+          900: '#121212',
+          800: '#1a1a1a',
+          700: '#2a2a2a',
+        },
+        // Light background
+        light: {
+          100: '#e2e5e7',
+          50: '#f5f6f7',
         },
         success: {
           600: '#16a34a',
@@ -50,7 +69,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        sans: ['Open Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        heading: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
         mono: ['JetBrains Mono', 'Monaco', 'Courier New', 'monospace'],
       },
       spacing: {
