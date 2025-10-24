@@ -36,3 +36,7 @@ next-env.d.ts
 # data directories - exclude stored applications and resumes
 /data/applications
 /data/resumes
+
+# internal docs
+ace_prd.md
+screening-questions.json
