@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { applicationFormSchema, ApplicationFormValues, validateFile } from '@/lib/validation';
-import { SCREENING_QUESTIONS } from '@/lib/constants';
+import { SCREENING_SECTIONS } from '@/lib/constants';
 import { PersonalInfoSection } from './PersonalInfoSection';
 import { ScreeningSection } from './ScreeningSection';
 import { FileUpload } from './FileUpload';
@@ -111,7 +111,7 @@ export function ApplicationForm() {
 
       {/* Screening Questions */}
       <ScreeningSection
-        questions={SCREENING_QUESTIONS}
+        sections={SCREENING_SECTIONS}
         register={register}
         errors={errors}
         watch={watch}

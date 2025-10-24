@@ -40,6 +40,46 @@ export function QuestionField({ question, questionNumber, totalQuestions, regist
     );
   }
 
+  // Handle checkbox questions
+  if (question.type === 'checkbox') {
+    return (
+      <div className="space-y-4">
+        <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+          Question {questionNumber} of {totalQuestions}
+        </div>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-slate-700">
+            {question.label}
+            {question.required && <span className="text-error-600 ml-1">*</span>}
+          </label>
+
+          <div className="space-y-2 mt-4">
+            {question.options?.map((option) => (
+              <label
+                key={option.value}
+                className="flex items-start gap-3 p-3 rounded-md hover:bg-gray-50 cursor-pointer transition-colors"
+              >
+                <input
+                  {...register(question.id as any)}
+                  type="checkbox"
+                  value={option.value}
+                  className="mt-1 w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-3 focus:ring-blue-100 focus:ring-offset-0"
+                />
+                <span className="text-base text-slate-700 leading-relaxed flex-1">{option.label}</span>
+              </label>
+            ))}
+          </div>
+
+          {error && (
+            <p className="text-xs text-error-600 mt-2" role="alert">
+              {error}
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   // Handle radio questions
   if (question.type === 'radio') {
     const selectedValue = watch(question.id);

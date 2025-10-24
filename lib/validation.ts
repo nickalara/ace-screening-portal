@@ -54,14 +54,16 @@ export const validateFile = (file: File): { valid: boolean; error?: string } => 
 
 // Full Application Form Validation Schema
 export const applicationFormSchema = personalInfoSchema.extend({
-  q1_technical_learning: z.string().min(100, 'Please provide at least 100 characters'),
-  q2_field_work_comfort: z.string().min(75, 'Please provide at least 75 characters'),
-  q3_ai_tools_proficiency: z.string().min(75, 'Please provide at least 75 characters'),
-  q4_communication_style: z.string().min(75, 'Please provide at least 75 characters'),
-  q5_clearance_status: z.string().min(1, 'Please select an option'),
-  q5_clearance_detail: z.string().optional(),
-  q6_travel_willingness: z.string().min(1, 'Please select an option'),
-  q7_motivation: z.string().min(75, 'Please provide at least 75 characters'),
+  q1_motivation: z.string().min(100, 'Please provide at least 100 characters'),
+  q2_travel_willingness: z.string().min(1, 'Please select an option'),
+  q3_technical_learning: z.string().min(75, 'Please provide at least 75 characters'),
+  q4_ai_tools_proficiency: z.array(z.string()).min(1, 'Please select at least one option'),
+  q5_manual_to_app: z.string().min(75, 'Please provide at least 75 characters'),
+  q6_ai_prompt_judgment: z.string().min(1, 'Please select an option'),
+  q7_technical_rewrite: z.string().min(50, 'Please provide at least 50 characters'),
+  q8_clarity_judgment: z.string().min(1, 'Please select an option'),
+  q9_field_scenario: z.string().min(1, 'Please select an option'),
+  q10_safety_scenario: z.string().min(50, 'Please provide at least 50 characters'),
 });
 
 export type ApplicationFormValues = z.infer<typeof applicationFormSchema>;

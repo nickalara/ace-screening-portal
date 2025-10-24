@@ -4,7 +4,7 @@ export interface ScreeningQuestion {
   id: string;
   questionNumber: number;
   label: string;
-  type: 'text' | 'textarea' | 'radio';
+  type: 'text' | 'textarea' | 'radio' | 'checkbox';
   required: boolean;
   placeholder?: string;
   helperText?: string;
@@ -28,6 +28,17 @@ export interface ScreeningQuestion {
     };
   };
   category?: string;
+  section?: string;
+  sectionNumber?: number;
+}
+
+export interface QuestionSection {
+  id: string;
+  title: string;
+  description?: string;
+  sectionNumber: number;
+  estimatedMinutes?: number;
+  questions: ScreeningQuestion[];
 }
 
 export interface PersonalInfo {
