@@ -24,6 +24,7 @@ export const SCREENING_SECTIONS: QuestionSection[] = [
         section: 'section_1',
         sectionNumber: 1,
       },
+      
       {
         id: 'q2_travel_willingness',
         questionNumber: 2,
