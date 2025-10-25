@@ -6,9 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { applicationFormSchema, ApplicationFormValues, validateFile } from '@/lib/validation';
 import { SCREENING_SECTIONS } from '@/lib/constants';
+import { TIMED_ASSESSMENT_QUESTIONS } from '@/lib/timed-questions';
 import { PersonalInfoSection } from './PersonalInfoSection';
 import { ScreeningSection } from './ScreeningSection';
 import { FileUpload } from './FileUpload';
+import { TimedAssessment } from './TimedAssessment';
 import { Button } from '../ui/Button';
 import { ErrorMessage } from '../ui/ErrorMessage';
 
@@ -18,6 +20,8 @@ export function ApplicationForm() {
   const [fileError, setFileError] = useState<string | undefined>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | undefined>();
+  const [showTimedAssessment, setShowTimedAssessment] = useState(false);
+  const [timedAssessmentResponses, setTimedAssessmentResponses] = useState<Record<string, string>>({});
 
   const {
     register,
@@ -84,6 +88,16 @@ export function ApplicationForm() {
     }
   };
 
+  const handleTimedAssessmentComplete = (responses: Record<string, string>) => {
+    setTimedAssessmentResponses(responses);
+    setShowTimedAssessment(false);
+    console.log('Timed Assessment Responses:', responses);
+  };
+
+  const handleTimedAssessmentClose = () => {
+    setShowTimedAssessment(false);
+  };
+
   // Scroll to first error on validation fail
   React.useEffect(() => {
     const firstError = Object.keys(errors)[0];
@@ -125,6 +139,31 @@ export function ApplicationForm() {
         <FileUpload onFileSelect={handleFileSelect} error={fileError} currentFile={file} />
       </div>
 
+      {/* Timed Assessment Demo Button */}
+      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-semibold text-slate-900 mb-1">Timed Assessment</h3>
+            <p className="text-sm text-slate-600">
+              Complete a 4-question timed assessment (90 seconds per question)
+            </p>
+            {Object.keys(timedAssessmentResponses).length > 0 && (
+              <p className="text-sm text-green-600 mt-1">
+                ✓ Assessment completed
+              </p>
+            )}
+          </div>
+          <Button
+            type="button"
+            onClick={() => setShowTimedAssessment(true)}
+            variant="primary"
+            className="px-6"
+          >
+            {Object.keys(timedAssessmentResponses).length > 0 ? 'Retake Assessment' : 'Start Assessment'}
+          </Button>
+        </div>
+      </div>
+
       {/* Submit Button */}
       <div className="flex justify-center pt-4">
         <Button
@@ -138,6 +177,15 @@ export function ApplicationForm() {
           {isSubmitting ? 'Submitting...' : 'Submit Application'}
         </Button>
       </div>
+
+      {/* Timed Assessment Modal */}
+      {showTimedAssessment && (
+        <TimedAssessment
+          questions={TIMED_ASSESSMENT_QUESTIONS}
+          onComplete={handleTimedAssessmentComplete}
+          onClose={handleTimedAssessmentClose}
+        />
+      )}
     </form>
   );
 }
